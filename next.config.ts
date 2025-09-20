@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Removed output: 'export' to enable server mode and Image optimization
+  output: 'export',
   trailingSlash: true,
   images: {
     remotePatterns: [
@@ -12,6 +12,7 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
     ],
+    unoptimized: true, // Required for static export
   },
 };
 

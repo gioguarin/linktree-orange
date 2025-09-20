@@ -168,6 +168,30 @@ The frontend automatically deploys to GitHub Pages via GitHub Actions when you p
 
 **Live URL:** https://gioguarin.github.io/linktree-orange
 
+### Backend Deployment
+Since GitHub Pages only serves static files, the API server must be deployed separately. Here are the recommended options:
+
+#### Railway (Recommended)
+1. Connect your GitHub repo to Railway
+2. Set environment variables in Railway dashboard
+3. Deploy automatically on push
+4. Update your `.env.local` with the Railway API URL
+
+#### Render
+1. Create a new Web Service on Render
+2. Connect your GitHub repo
+3. Set build command: `npm install`
+4. Set start command: `npm start`
+5. Add environment variables
+
+#### Heroku
+```bash
+# Install Heroku CLI
+heroku create your-app-name
+heroku config:set REDIS_URL=your-redis-url
+git push heroku master
+```
+
 ### Backend Options
 
 #### Railway (Recommended)

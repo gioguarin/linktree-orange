@@ -23,13 +23,16 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Install dependencies
+      - name: Install frontend dependencies
         run: npm ci
 
-      - name: Build
+      - name: Build frontend
         run: npm run build
 
-      - name: Upload artifact
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload frontend artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
