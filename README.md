@@ -6,11 +6,14 @@ A modern, sleek linktree website with persistent click tracking powered by Redis
 
 - **Modern UI**: Beautiful orange gradient theme with light/dark mode toggle
 - **Persistent Analytics**: Redis-powered click tracking across all devices
-- **Social Links**: Pre-configured social media links with icons
+- **Social Links**: Fully configurable social media links with custom URLs
 - **Responsive Design**: Works perfectly on desktop, tablet, and mobile
-- **Fast Performance**: Next.js with static generation for optimal speed
+- **Fast Performance**: Next.js with server-side rendering for optimal speed
 - **Smart Fallbacks**: Automatically falls back to localStorage if API unavailable
-- **Real-time Updates**: Live click count updates with visual feedback
+- **Real-time Updates**: Live click count updates with modern toast notifications
+- **Loading States**: Skeleton screens and smooth animations
+- **Micro-interactions**: Hover effects and click feedback
+- **Customizable Profile**: Easy configuration via environment variables
 
 ## 🚀 Quick Start
 
@@ -135,13 +138,27 @@ Record a click for a specific link.
 
 #### Frontend (.env.local)
 ```env
-NEXT_PUBLIC_API_URL=http://localhost:3001
+# API Configuration
+NEXT_PUBLIC_API_URL=http://localhost:3003
+
+# User Profile Configuration
+NEXT_PUBLIC_USER_NAME=John Doe
+NEXT_PUBLIC_USER_USERNAME=@johndoe
+NEXT_PUBLIC_USER_TITLE=Developer & Designer
+NEXT_PUBLIC_USER_BIO=Welcome to my digital hub! Connect with me across platforms and discover my latest projects.
+NEXT_PUBLIC_USER_AVATAR=https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face
+
+# Social Links Configuration
+NEXT_PUBLIC_TWITTER_URL=https://twitter.com/johndoe
+NEXT_PUBLIC_INSTAGRAM_URL=https://instagram.com/johndoe
+NEXT_PUBLIC_GITHUB_URL=https://github.com/johndoe
+NEXT_PUBLIC_LINKEDIN_URL=https://linkedin.com/in/johndoe
 ```
 
-#### Backend
+#### Backend (.env)
 ```env
 REDIS_URL=redis://username:password@host:port
-PORT=3001
+PORT=3003
 ```
 
 ## Deployment

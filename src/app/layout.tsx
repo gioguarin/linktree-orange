@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ToastContainer from "@/components/Toast";
+import { USER_CONFIG } from "@/lib/config";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "John Doe's Linktree",
-  description: "Connect with John Doe on social media",
+  title: `${USER_CONFIG.name}'s Linktree`,
+  description: `Connect with ${USER_CONFIG.name} on social media`,
 };
 
 export default function RootLayout({

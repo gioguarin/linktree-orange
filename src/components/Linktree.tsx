@@ -4,13 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { showToast } from './Toast';
 import { SkeletonProfile, SkeletonLink } from './Skeleton';
-
-const links = [
-  { name: 'Twitter', url: '#', key: 'twitter', icon: '🐦' },
-  { name: 'Instagram', url: '#', key: 'instagram', icon: '📷' },
-  { name: 'GitHub', url: '#', key: 'github', icon: '💻' },
-  { name: 'LinkedIn', url: '#', key: 'linkedin', icon: '💼' },
-];
+import { USER_CONFIG, SOCIAL_LINKS } from '@/lib/config';
 
 export default function Linktree() {
   const [theme, setTheme] = useState('light');
@@ -24,7 +18,6 @@ export default function Linktree() {
     document.documentElement.setAttribute('data-theme', savedTheme);
 
     // Fetch click counts from API
-    // Replace with your deployed API URL
     const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3003';
 
     fetch(`${API_BASE}/api/clicks`)
@@ -35,9 +28,9 @@ export default function Linktree() {
       })
       .catch(err => {
         console.error('Failed to fetch click counts:', err);
-        // Fallback to localStorage for demo
+        // Fallback to localStorage when API is unavailable
         const savedCounts: Record<string, number> = {};
-        links.forEach(link => {
+        SOCIAL_LINKS.forEach(link => {
           const count = parseInt(localStorage.getItem(link.key) || '0');
           savedCounts[link.key] = count;
         });
@@ -72,7 +65,7 @@ export default function Linktree() {
         showToast(`${key.charAt(0).toUpperCase() + key.slice(1)} clicked ${data[key]} times!`, 'success');
       } else {
         console.error('Failed to record click');
-        // Fallback to local increment for demo
+        // Fallback to local increment when API is unavailable
         const newCount = (clickCounts[key] || 0) + 1;
         setClickCounts(prev => ({ ...prev, [key]: newCount }));
         showToast(`${key.charAt(0).toUpperCase() + key.slice(1)} clicked ${newCount} times (offline)`, 'warning');
@@ -80,7 +73,7 @@ export default function Linktree() {
       setIsClicking(null);
     } catch (error) {
       console.error('Error recording click:', error);
-      // Fallback
+      // Fallback to local increment when API fails
       const newCount = (clickCounts[key] || 0) + 1;
       setClickCounts(prev => ({ ...prev, [key]: newCount }));
       showToast(`${key.charAt(0).toUpperCase() + key.slice(1)} clicked ${newCount} times (offline)`, 'warning');
@@ -106,7 +99,7 @@ export default function Linktree() {
               <div className="relative inline-block">
                 <div className="absolute inset-0 bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 rounded-full blur-lg opacity-75 animate-pulse"></div>
                 <Image
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+                  src={USER_CONFIG.avatar}
                   alt="Profile"
                   width={128}
                   height={128}
@@ -126,15 +119,15 @@ export default function Linktree() {
 
             <div className="space-y-3 sm:space-y-4">
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-orange-600 via-pink-600 to-purple-600 dark:from-orange-400 dark:via-pink-400 dark:to-purple-400 bg-clip-text text-transparent leading-tight px-2">
-                John Doe
+                {USER_CONFIG.name}
               </h1>
               <div className="flex items-center justify-center space-x-2 text-orange-600 dark:text-orange-400">
-                <span className="text-xs sm:text-sm font-medium">@johndoe</span>
+                <span className="text-xs sm:text-sm font-medium">{USER_CONFIG.username}</span>
                 <span className="text-xs">•</span>
-                <span className="text-xs sm:text-sm">Developer & Designer</span>
+                <span className="text-xs sm:text-sm">{USER_CONFIG.title}</span>
               </div>
               <p className="text-gray-700 dark:text-gray-300 text-base sm:text-lg leading-relaxed max-w-xs sm:max-w-sm mx-auto font-medium px-2">
-                Welcome to my digital hub! Connect with me across platforms and discover my latest projects.
+                {USER_CONFIG.bio}
               </p>
             </div>
 
@@ -161,7 +154,7 @@ export default function Linktree() {
               </div>
             ))
           ) : (
-            links.map((link, index) => (
+            SOCIAL_LINKS.map((link, index) => (
               <div key={link.key} className="relative group animate-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: `${index * 150}ms` }}>
                 <a
                   href={link.url}
