@@ -1,13 +1,30 @@
+:root {
+    --bg-gradient: linear-gradient(135deg, #FFE4B5, #FFDAB9);
+    --text-color: #8B4513;
+    --container-bg: rgba(255, 255, 255, 0.8);
+    --link-bg: linear-gradient(45deg, #FFA500, #FF8C00);
+    --link-hover-shadow: rgba(255, 140, 0, 0.3);
+}
+
+[data-theme="dark"] {
+    --bg-gradient: linear-gradient(135deg, #2D1810, #4A2C1A);
+    --text-color: #FFE4B5;
+    --container-bg: rgba(45, 24, 16, 0.8);
+    --link-bg: linear-gradient(45deg, #FF8C00, #FFA500);
+    --link-hover-shadow: rgba(255, 140, 0, 0.5);
+}
+
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #FFE4B5, #FFDAB9);
+    background: var(--bg-gradient);
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    color: #8B4513;
+    color: var(--text-color);
+    transition: background 0.3s, color 0.3s;
 }
 
 .container {
@@ -15,9 +32,10 @@ body {
     width: 100%;
     padding: 20px;
     text-align: center;
-    background: rgba(255, 255, 255, 0.8);
+    background: var(--container-bg);
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s;
 }
 
 .profile-pic {
@@ -35,7 +53,7 @@ h1 {
 
 p {
     margin-bottom: 30px;
-    color: #D2691E;
+    color: var(--text-color);
 }
 
 .links {
@@ -47,7 +65,7 @@ p {
 .link {
     display: block;
     padding: 15px;
-    background: linear-gradient(45deg, #FFA500, #FF8C00);
+    background: var(--link-bg);
     color: white;
     text-decoration: none;
     border-radius: 10px;
@@ -57,5 +75,23 @@ p {
 
 .link:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+    box-shadow: 0 4px 15px var(--link-hover-shadow);
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--link-bg);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.theme-toggle:hover {
+    background: linear-gradient(45deg, #FF8C00, #FFA500);
 }
