@@ -1,18 +1,16 @@
-# 🍊 Linktree with Redis Backend
+# Linktree with Redis Backend
 
 A modern, sleek linktree website with persistent click tracking powered by Redis. Built with Next.js and featuring a beautiful orange-themed UI.
 
-![Linktree Preview](https://via.placeholder.com/800x400/FFA500/FFFFFF?text=Linktree+Preview)
+## Features
 
-## ✨ Features
-
-- 🎨 **Modern UI**: Beautiful orange gradient theme with light/dark mode toggle
-- 📊 **Persistent Analytics**: Redis-powered click tracking across all devices
-- 🔗 **Social Links**: Pre-configured social media links with icons
-- 📱 **Responsive Design**: Works perfectly on desktop, tablet, and mobile
-- ⚡ **Fast Performance**: Next.js with static generation for optimal speed
-- 🔄 **Smart Fallbacks**: Automatically falls back to localStorage if API unavailable
-- 🎯 **Real-time Updates**: Live click count updates with visual feedback
+- **Modern UI**: Beautiful orange gradient theme with light/dark mode toggle
+- **Persistent Analytics**: Redis-powered click tracking across all devices
+- **Social Links**: Pre-configured social media links with icons
+- **Responsive Design**: Works perfectly on desktop, tablet, and mobile
+- **Fast Performance**: Next.js with static generation for optimal speed
+- **Smart Fallbacks**: Automatically falls back to localStorage if API unavailable
+- **Real-time Updates**: Live click count updates with visual feedback
 
 ## 🚀 Quick Start
 
@@ -94,7 +92,7 @@ npm run dev  # Development with auto-reload
 npm start    # Production
 ```
 
-## 📡 API Reference
+## API Reference
 
 ### Endpoints
 
@@ -131,7 +129,7 @@ Record a click for a specific link.
 }
 ```
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -146,7 +144,7 @@ REDIS_URL=redis://username:password@host:port
 PORT=3001
 ```
 
-## 🚀 Deployment
+## Deployment
 
 ### Frontend (GitHub Pages)
 The frontend automatically deploys to GitHub Pages via GitHub Actions when you push to the `master` branch.
@@ -173,7 +171,7 @@ git push heroku master
 - **Vercel**: For serverless deployment
 - **DigitalOcean**: App Platform
 
-## 🛠️ Development
+## Development
 
 ### Available Scripts
 
@@ -215,7 +213,7 @@ linktree-orange/
 └── README.md
 ```
 
-## 🎨 Customization
+## Customization
 
 ### Changing Colors
 Edit `src/app/globals.css` to modify the orange theme:
@@ -242,7 +240,7 @@ Edit the profile section in `src/components/Linktree.tsx`:
 <p>Welcome to my linktree!</p>
 ```
 
-## 📊 Analytics
+## Analytics
 
 Click data is stored in Redis with keys like `clicks:twitter`, `clicks:instagram`, etc. You can:
 
@@ -251,7 +249,7 @@ Click data is stored in Redis with keys like `clicks:twitter`, `clicks:instagram
 - Export data for analysis
 - Set up monitoring/alerts
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/amazing-feature`
@@ -259,25 +257,21 @@ Click data is stored in Redis with keys like `clicks:twitter`, `clicks:instagram
 4. Push to branch: `git push origin feature/amazing-feature`
 5. Open a Pull Request
 
-## 📄 License
+## License
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [Next.js](https://nextjs.org/) - The React framework
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS
 - [Upstash](https://upstash.com/) - Redis as a service
 - [Express.js](https://expressjs.com/) - Web framework
 
-## 📞 Support
+## Support
 
 If you have questions or need help:
 
 - Open an issue on GitHub
 - Check the [PROJECTPLAN.md](PROJECTPLAN.md) for roadmap
 - Review the API server [README](api-server/README.md)
-
----
-
-**Made with ❤️ and lots of 🍊**
