@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Linktree with Redis Backend
 
-## Getting Started
+A modern, sleek linktree website with click tracking powered by Redis.
 
-First, run the development server:
+## Features
 
+- 🎨 Modern orange-themed UI with light/dark mode
+- 📊 Real-time click tracking with Redis backend
+- 🔗 Social media links with icons
+- 📱 Responsive design
+- ⚡ Fast Next.js frontend
+- 🔄 Automatic fallbacks to localStorage
+
+## Setup
+
+### Frontend (Next.js)
+
+1. Install dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Create environment file:
+```bash
+cp .env.example .env.local
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Update `.env.local` with your API URL:
+```
+NEXT_PUBLIC_API_URL=https://your-api-server-url
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Run development server:
+```bash
+npm run dev
+```
 
-## Learn More
+### Backend (Express + Redis)
 
-To learn more about Next.js, take a look at the following resources:
+See `api-server/README.md` for detailed setup instructions.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Redis Setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Option 1: Upstash (Recommended)
 
-## Deploy on Vercel
+1. Go to [Upstash](https://upstash.com)
+2. Create a Redis database
+3. Copy the Redis URL
+4. Set `REDIS_URL` environment variable in your API server
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Option 2: Local Redis
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Install Redis locally
+2. Start Redis server
+3. Use default `REDIS_URL=redis://localhost:6379`
+
+## API Endpoints
+
+- `GET /api/clicks` - Get click counts
+- `POST /api/clicks` - Record a click
+
+## Deployment
+
+### Frontend
+Deploy to Vercel, Netlify, or GitHub Pages.
+
+### Backend
+Deploy API server to Heroku, Railway, Render, or any Node.js hosting.
+
+## Environment Variables
+
+### Frontend (.env.local)
+```
+NEXT_PUBLIC_API_URL=https://your-api-server-url
+```
+
+### Backend
+```
+REDIS_URL=redis://username:password@host:port
+PORT=3001
+```
+
+## Development
+
+```bash
+# Frontend
+npm run dev
+
+# Backend
+cd api-server && npm run dev
+```

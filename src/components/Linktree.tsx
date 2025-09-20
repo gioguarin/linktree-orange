@@ -19,12 +19,23 @@ export default function Linktree() {
     setTheme(savedTheme);
     document.documentElement.setAttribute('data-theme', savedTheme);
 
-    const savedCounts: Record<string, number> = {};
-    links.forEach(link => {
-      const count = parseInt(localStorage.getItem(link.key) || '0');
-      savedCounts[link.key] = count;
-    });
-    setClickCounts(savedCounts);
+    // Fetch click counts from API
+    // Replace with your deployed API URL
+    const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+
+    fetch(`${API_BASE}/api/clicks`)
+      .then(res => res.json())
+      .then(data => setClickCounts(data))
+      .catch(err => {
+        console.error('Failed to fetch click counts:', err);
+        // Fallback to localStorage for demo
+        const savedCounts: Record<string, number> = {};
+        links.forEach(link => {
+          const count = parseInt(localStorage.getItem(link.key) || '0');
+          savedCounts[link.key] = count;
+        });
+        setClickCounts(savedCounts);
+      });
   }, []);
 
   const toggleTheme = () => {
@@ -34,11 +45,36 @@ export default function Linktree() {
     document.documentElement.setAttribute('data-theme', newTheme);
   };
 
-  const handleLinkClick = (key: string) => {
-    const newCount = (clickCounts[key] || 0) + 1;
-    setClickCounts(prev => ({ ...prev, [key]: newCount }));
-    localStorage.setItem(key, newCount.toString());
-    alert(`${key} clicked ${newCount} times`);
+  const handleLinkClick = async (key: string) => {
+    const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+
+    try {
+      const response = await fetch(`${API_BASE}/api/clicks`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ link: key }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setClickCounts(prev => ({ ...prev, [key]: data[key] }));
+        alert(`${key} clicked ${data[key]} times`);
+      } else {
+        console.error('Failed to record click');
+        // Fallback to local increment for demo
+        const newCount = (clickCounts[key] || 0) + 1;
+        setClickCounts(prev => ({ ...prev, [key]: newCount }));
+        alert(`${key} clicked ${newCount} times (local)`);
+      }
+    } catch (error) {
+      console.error('Error recording click:', error);
+      // Fallback
+      const newCount = (clickCounts[key] || 0) + 1;
+      setClickCounts(prev => ({ ...prev, [key]: newCount }));
+      alert(`${key} clicked ${newCount} times (local)`);
+    }
   };
 
   return (
