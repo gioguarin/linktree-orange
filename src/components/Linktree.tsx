@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 const links = [
   { name: 'Twitter', url: '#', key: 'twitter', icon: '🐦' },
@@ -52,9 +53,11 @@ export default function Linktree() {
 
         <div className="text-center mb-10">
           <div className="relative mb-6">
-            <img
+            <Image
               src="https://via.placeholder.com/120"
               alt="Profile"
+              width={128}
+              height={128}
               className="w-32 h-32 rounded-full mx-auto border-4 border-orange-400 dark:border-orange-500 shadow-2xl transition-transform duration-300 hover:scale-110"
             />
             <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
